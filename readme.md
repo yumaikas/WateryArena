@@ -8,3 +8,6 @@ The idea is build a top-down arena shooter with a two-layered combat field, so t
 
 
 There is still a *lot* of work outstanding
+
+To run (currently on windows), download love 11.1, unpack into this folder, and run `make play`
+
