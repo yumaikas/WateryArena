@@ -21,5 +21,4 @@
 	(let [timer (timers.create time timeout)]
 		(set timer.running true)
 		timer))
-
 timers

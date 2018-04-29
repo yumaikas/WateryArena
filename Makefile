@@ -3,7 +3,7 @@
 
 compile: game/main.lua game/room.lua game/conf.lua game/images.lua
 compile: game/utils.lua game/player.lua game/state.lua game/timers.lua
-compile: game/player-spells.lua
+compile: game/player-spells.lua game/enemies.lua
 
 play: compile
 	lovec.exe game
