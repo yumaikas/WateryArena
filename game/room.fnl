@@ -1,32 +1,22 @@
-;; Room module
-
+(local player-spells (require "player-spells"))
 ;; Each room has two layers
 
 (local images (require "images"))
-(local room_metatable {})
+;; Room module
+(local room {})
 
+(defn room.update [self dt] 
+	(player-spells.update self.player-spells dt)
 
-(defn room_metatable.update [self dt] 
-	(each [i enemy (ipairs (self.enemies))]
-		(+ i)))
+	)
 
-(defn room_metatable.render [self]
+(defn room.render [self]
 	(let 
 		[bottom-layer (. images "room-bottom.png")
 		top-layer (. images "room-top.png") 
 		draw love.graphics.draw]
-		(draw (if self.is-low bottom-layer top-layer) 0 0 0 3 3)))
+		(draw (if self.is-low bottom-layer top-layer) 0 0 0 3 3)
+		(player-spells.render self.player-spells self.is-low)
+		))
 
-(fn [player] 
-	(let [
-			room {
-				:enemies {}
-				:enemy-spells {}
-				:player-spells {}
-				:player player
-				:doors {}
-				:is-low true
-				:background-image nil
-			}]
-		(setmetatable room {:__index room_metatable} )
-		room))
+room

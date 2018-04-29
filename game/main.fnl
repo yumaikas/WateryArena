@@ -1,22 +1,32 @@
 ;; Requires
 (local room (require "room"))
-(require "utils")
+(local player (require "player"))
+(local utils (require "utils"))
+(local state (require "state"))
 
 
-(local first-room (room {}))
+(local input-map {
+	:w :up
+	:a :left
+	:d :right
+	:s :down
+})
 
-(local state {
-	:timer 5
-	})
-
+(defn love.load []
+	(love.mouse.setGrabbed true))
 
 (defn love.draw []
-	(: first-room :render))
+	(room.render (utils.current state.rooms))
+	(player.render state.player)
+	)
+
+(defn love.keypressed [key scancode isrepeat]
+	(let [current-room (utils.current state.rooms)]
+		(when (= scancode :space) (set current-room.is-low (not current-room.is-low)))
+		(when (= scancode :escape) (love.event.quit))
+	))
 
 (defn love.update [dt]
-	(set state.timer (- state.timer dt))
-	(when (< state.timer 0) 
-		(set state.timer 5)
-		(set first-room.is-low (not first-room.is-low))))
-
-
+	(player.update state.player dt)
+	(room.update (utils.current state.rooms) dt)
+	)
