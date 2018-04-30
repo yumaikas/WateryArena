@@ -1,4 +1,5 @@
 (local conf (require "conf"))
+(local enemies (require "enemies"))
 {
 	:timer 5
 	:player {
@@ -14,7 +15,9 @@
 	:rooms {
 		:idx 1
 		:items [{
-			:enemies {}
+			:enemies [
+				(enemies.create :square 1 1)	
+			] 
 			:enemy-spells {}
 			:player-spells {}
 			:doors {}

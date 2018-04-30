@@ -56,7 +56,7 @@
 	)
 
 (defn enemies.create [type x y] 
-(let [enemy { 
+	(let [enemy { 
 		:type type 
 		:x x :y y 
 		:xt 0 :yt 0
